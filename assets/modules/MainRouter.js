@@ -1,19 +1,23 @@
 CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 	
 	routes: {
-		""         : "loadPortfolio",
+		""              : "loadPortfolio",
+		"tagfilter/:id" : "loadPortfolio"
 		
 	},
 	
-	loadPortfolio : function() {
-		this.loadTags();
+	loadPortfolio : function(id) {
+		if($.trim($("#ul_tags").html()) == "") {
+			this.loadTags();
+		}
+		this.loadThumbs(id);
 	},
 
 	loadTags : function() {
 		require(["assets/modules/tags/models/TagModel.js"], function() {
 			require(["assets/modules/tags/views/TagView.js"], function() {
 				$.ajax({
-					url : "assets/modules/tags/views/TagTemplate.html",
+					url : "assets/modules/tags/templates/TagTemplate.html",
 					success : function(data) {
 						var tagViewObject = new CNPORTFOLIO.TagView({
 							template : data
@@ -23,6 +27,10 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 				});
 			});
 		});
+	},
+
+	loadThumbs : function(id) {
+		alert(id);
 	}
 	
 });
