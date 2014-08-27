@@ -2,10 +2,14 @@ CNPORTFOLIO.ThumbModel = Backbone.Model.extend({
 	initialize : function() {
 		this.url = "";
 	},
-	getThumbsFromServer : function() {
+	getThumbsFromServer : function(id) {
 		if($.trim(this.url) != "") {
+			var url = "google.com";
+			if(id) {
+				url = "sfsfas"
+			}
 			this.fetch({
-				url : "google.com",
+				url : url,
 				success : function(model, data) {
 					model.set('thumbs', data);
 					model.trigger("THUMB_LIST_RECEIVED");

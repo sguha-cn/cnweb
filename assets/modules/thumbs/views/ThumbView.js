@@ -3,6 +3,7 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		this.model = new CNPORTFOLIO.ThumbModel();
 		this.$el = $(".thumbList");
 		this.template = options.template;
+		this.id = options.id;
 		this.bindEvents();
 	},
 
@@ -11,7 +12,7 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 	},
 
 	startDisplayingThumbs : function() {
-		this.model.getThumbsFromServer();
+		this.model.getThumbsFromServer(this.id);
 	},
 
 	populateThumbs : function() {

@@ -36,7 +36,8 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 					url : "assets/modules/thumbs/templates/ThumbTemplate.html",
 					success : function(data) {
 						var thumbViewObject = new CNPORTFOLIO.ThumbView({
-							template : data
+							template : data,
+							tag      : id
 						});
 						thumbViewObject.startDisplayingThumbs();
 					}
