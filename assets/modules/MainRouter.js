@@ -30,7 +30,19 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 	},
 
 	loadThumbs : function(id) {
-		alert(id);
+		require(["assets/modules/thumbs/models/ThumbModel.js"], function() {
+			require(["assets/modules/thumbs/views/ThumbView.js"], function() {
+				$.ajax({
+					url : "assets/modules/thumbs/templates/ThumbTemplate.html",
+					success : function(data) {
+						var thumbViewObject = new CNPORTFOLIO.ThumbView({
+							template : data
+						});
+						thumbViewObject.startDisplayingThumbs();
+					}
+				});
+			});
+		});
 	}
 	
 });

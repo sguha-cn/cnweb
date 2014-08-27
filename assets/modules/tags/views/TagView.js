@@ -8,7 +8,11 @@ CNPORTFOLIO.TagView = Backbone.View.extend({
 	},
 
 	bindEvents : function() {
+		var selfObject = this;
 		this.listenTo(this.model, "TAG_LIST_RECEIVED", this.populateTags);
+		$("#ul_tags li a").on('click', function() {
+			alert("x");
+		})
 	},
 
 	startDisplayingTags : function() {
@@ -20,6 +24,7 @@ CNPORTFOLIO.TagView = Backbone.View.extend({
 		var rendarableData = this.prepareData(data);
 		var html = Mustache.render(this.template, rendarableData);
 		this.$el.html(html);
+		$("#ul_tags li").on('click', function(event){selfObject.clearCenterContent(event)});
 	},
 
 	prepareData : function(data) {
