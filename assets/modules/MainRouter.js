@@ -2,15 +2,23 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 	
 	routes: {
 		""              : "loadPortfolio",
-		"tagfilter/:id" : "loadPortfolio"
-		
+		"tagfilter/:id" : "loadPortfolio",
+		"showall"       : "loadAllProject"
+	},
+
+	loadAllProject : function() {
+		if($.trim($("#ul_tags").html()) == "") {
+			this.loadTags();
+		}
+		var showAll = true;
+		this.loadThumbs(null, showAll);
 	},
 	
 	loadPortfolio : function(id) {
 		if($.trim($("#ul_tags").html()) == "") {
 			this.loadTags();
 		}
-		this.loadThumbs(id);
+		this.loadThumbs(id, false);
 	},
 
 	loadTags : function() {
@@ -29,7 +37,7 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 		});
 	},
 
-	loadThumbs : function(id) {
+	loadThumbs : function(id, showAll) {
 		require(["assets/modules/thumbs/models/ThumbModel.js"], function() {
 			require(["assets/modules/thumbs/views/ThumbView.js"], function() {
 				$.ajax({
@@ -39,7 +47,7 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 							template : data,
 							tag      : id
 						});
-						thumbViewObject.startDisplayingThumbs(id);
+						thumbViewObject.startDisplayingThumbs(id, showAll);
 					}
 				});
 			});

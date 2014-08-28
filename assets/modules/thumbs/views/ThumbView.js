@@ -20,9 +20,10 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		this.listenTo(this.model, "THUMB_LIST_RECEIVED", this.populateThumbs);
 	},
 
-	startDisplayingThumbs : function(id) {
+	startDisplayingThumbs : function(id, showAll) {
 		this.id=id;
-		this.model.getThumbsFromServer(id,0);
+		this.showAll = showAll;
+		this.model.getThumbsFromServer(id,0, showAll);
 	},
 
 	loadThumbs : function(startIndex) {
@@ -38,8 +39,8 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		$(".thumbList li a").unbind('click');
 		$(".thumbList li a").click(function(event){self.initiateDisplayThumb(event)});
 		$(".portfolioDetailsBlk2 .loadmore").unbind('click');
-		$(".portfolioDetailsBlk2 .loadmore").click(function(){self.loadThumbs(parseInt($(".portfolioDetailsBlk2 .loadmore").attr('data-last-val')))});
-		if($(".thumbList li").length<9) {
+		$(".portfolioDetailsBlk2 .loadmore").click(function(event){event.preventDefault();$(event.currentTarget).hide();self.loadThumbs(parseInt($(".portfolioDetailsBlk2 .loadmore").attr('data-last-val')))});
+		if(rendarableData && typeof rendarableData.thumbs != "undefined" && rendarableData.thumbs && rendarableData.thumbs.length<9) {
 			$(".portfolioDetailsBlk2 .loadmore").css({
 				"display" : "none"
 			}); 
@@ -48,6 +49,7 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 			$(".portfolioDetailsBlk2 .loadmore").css({
 				"display" : "block"
 			});
+			
 		}
 		if(!rendarableData.thumbs) {
 			$(".portfolioDetailsBlk2 .loadmore").css({
@@ -58,7 +60,9 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 	},
 
 	prepareData : function(data) {
-		var data = {thumbs : ((data)?data.Message:null)};
-		return data;
+		var returnData = {};
+		returnData.thumbs = ((data)?data.Message:null);
+
+		return returnData;
 	}
 });
