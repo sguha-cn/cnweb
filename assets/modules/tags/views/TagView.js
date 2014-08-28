@@ -28,11 +28,11 @@ CNPORTFOLIO.TagView = Backbone.View.extend({
 	},
 
 	clearCenterContent : function(event) {
-		alert("x");
+		$(".thumbList").empty();
 	},
 
 	prepareData : function(data) {
-		var data = {tags : data};
+		var data = {tags : $.map(data.Message, function(el) { return el; })};
 		return data;
 	}
 });

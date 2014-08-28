@@ -1,13 +1,16 @@
 CNPORTFOLIO.ThumbModel = Backbone.Model.extend({
 	initialize : function() {
-		this.url = "";
+		
 	},
-	getThumbsFromServer : function(id) {
+	getThumbsFromServer : function(id,startIndex) {
+		var url = "google.com";
+		if(id) {
+			url = CNPORTFOLIO.baseUrl + "cnweb/webservice/Projectsbytag?token=123cn123&tag=" + id;
+		} else {
+			url = CNPORTFOLIO.baseUrl + "cnweb/webservice/ShowAllProjects?token=123cn123&start_index="+startIndex+"&stop_index="+(startIndex+10);
+		}
 		if($.trim(this.url) != "") {
-			var url = "google.com";
-			if(id) {
-				url = "sfsfas"
-			}
+			var selfObject = this;
 			this.fetch({
 				url : url,
 				success : function(model, data) {
@@ -15,7 +18,8 @@ CNPORTFOLIO.ThumbModel = Backbone.Model.extend({
 					model.trigger("THUMB_LIST_RECEIVED");
 				},
 				error   : function() {
-
+					selfObject.set('thumbs', null);
+					selfObject.trigger("THUMB_LIST_RECEIVED");	
 				}
 			});	
 		} else {

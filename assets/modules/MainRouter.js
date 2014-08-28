@@ -39,7 +39,7 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 							template : data,
 							tag      : id
 						});
-						thumbViewObject.startDisplayingThumbs();
+						thumbViewObject.startDisplayingThumbs(id);
 					}
 				});
 			});

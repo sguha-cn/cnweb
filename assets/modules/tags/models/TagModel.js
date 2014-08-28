@@ -1,12 +1,13 @@
 CNPORTFOLIO.TagModel = Backbone.Model.extend({
 	initialize : function() {
-		this.url = "";
+		this.url = CNPORTFOLIO.baseUrl + "cnweb/webservice/Alltags?token=123cn123";
 	},
 	getTagsFromServer : function() {
 		if($.trim(this.url) != "") {
-			alert(this.url);
+			var self = this;
 			this.fetch({
-				url : "google.com",
+				url : self.url,
+				type : "GET",
 				success : function(model, data) {
 					model.set('tags', data);
 					model.trigger("TAG_LIST_RECEIVED");

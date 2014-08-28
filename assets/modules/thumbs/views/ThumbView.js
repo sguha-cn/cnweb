@@ -3,7 +3,6 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		this.model = new CNPORTFOLIO.ThumbModel();
 		this.$el = $(".thumbList");
 		this.template = options.template;
-		this.id = options.id;
 		this.bindEvents();
 		var self = this;
 		
@@ -13,17 +12,7 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		event.preventDefault();
 		var divToOpen = $(event.currentTarget).attr('href');
 		$.fancybox({
-	        href: divToOpen, 
-	        modal: true,
-	        helpers: {
-                title: {
-                    type: 'outside'
-                },
-                overlay: {
-                    speedOut: 0
-                }
-            },
-            'hideOnContentClick': true
+	        "href": divToOpen, 
 	    });
 	},
 
@@ -31,22 +20,45 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		this.listenTo(this.model, "THUMB_LIST_RECEIVED", this.populateThumbs);
 	},
 
-	startDisplayingThumbs : function() {
-		this.model.getThumbsFromServer(this.id);
+	startDisplayingThumbs : function(id) {
+		this.id=id;
+		this.model.getThumbsFromServer(id,0);
+	},
+
+	loadThumbs : function(startIndex) {
+		this.model.getThumbsFromServer(this.id, startIndex);
 	},
 
 	populateThumbs : function() {
 		var data = this.model.get('thumbs');
 		var rendarableData = this.prepareData(data);
 		var html = Mustache.render(this.template, rendarableData);
-		this.$el.html(html);
+		this.$el.append(html);
 		var self = this;
 		$(".thumbList li a").unbind('click');
 		$(".thumbList li a").click(function(event){self.initiateDisplayThumb(event)});
+		$(".portfolioDetailsBlk2 .loadmore").unbind('click');
+		$(".portfolioDetailsBlk2 .loadmore").click(function(){self.loadThumbs(parseInt($(".portfolioDetailsBlk2 .loadmore").attr('data-last-val')))});
+		if($(".thumbList li").length<9) {
+			$(".portfolioDetailsBlk2 .loadmore").css({
+				"display" : "none"
+			}); 
+			
+		} else {
+			$(".portfolioDetailsBlk2 .loadmore").css({
+				"display" : "block"
+			});
+		}
+		if(!rendarableData.thumbs) {
+			$(".portfolioDetailsBlk2 .loadmore").css({
+				"display" : "none"
+			});
+		}
+		$(".portfolioDetailsBlk2 .loadmore").attr('data-last-val', $(".thumbList li").length);
 	},
 
 	prepareData : function(data) {
-		var data = {thumbs : data};
+		var data = {thumbs : ((data)?data.Message:null)};
 		return data;
 	}
 });
