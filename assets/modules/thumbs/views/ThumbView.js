@@ -5,7 +5,7 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		this.template = options.template;
 		this.id = options.id;
 		this.bindEvents();
-		var self = this;alert("p");
+		var self = this;
 		
 	},
 
@@ -41,6 +41,7 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		var html = Mustache.render(this.template, rendarableData);
 		this.$el.html(html);
 		var self = this;
+		$(".thumbList li a").unbind('click');
 		$(".thumbList li a").click(function(event){self.initiateDisplayThumb(event)});
 	},
 
