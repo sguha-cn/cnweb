@@ -4,7 +4,7 @@
 
         <img style="width:240px;height:191px" src="{{#image_small}}{{image_small}}{{/image_small}}{{^image_small}}http://www.electrolabindia.com/Images/nodata.jpg{{/image_small}}" alt="" />
         <h2>{{project_name}} </h2>
-        <p>quis sem auctor eleifend. Nulla facilisi. Curabitur vel vehicula quam</p>
+        <p>{{project_brief_desc}}</p>
     </a>
     <div id="{{id}}" style="width:100%;display: none;">
         <div class="lightboxpanel">
@@ -22,7 +22,7 @@
             {{/project_name}}
             {{#project_url}}    
                 <p>Url
-                    <span><a href="#">{{project_url}}</a></span>
+                    <span><a href="{{project_url}}" target="_blank">{{project_url}}</a></span>
                 </p>
             {{/project_url}}    
             {{#project_brief_desc}}
@@ -43,7 +43,7 @@
 {{/thumbs}}
 {{^thumbs}}
 <li>
-    <a href="#inline1" target="_blank" class="fancybox-effects-a">
+    <a href="#inline1" target="_blank" class="fancybox-effects-a noData">
 
         <img src="" alt="" />
         <h2>No more project availeble for the tag </h2>

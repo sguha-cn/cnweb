@@ -22,10 +22,10 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 	},
 
 	loadTags : function() {
-		require(["assets/modules/tags/models/TagModel.js"], function() {
-			require(["assets/modules/tags/views/TagView.js"], function() {
+		require(["assets/modules_portfolio/tags/models/TagModel.js"], function() {
+			require(["assets/modules_portfolio/tags/views/TagView.js"], function() {
 				$.ajax({
-					url : "assets/modules/tags/templates/TagTemplate.html",
+					url : "assets/modules_portfolio/tags/templates/TagTemplate.html",
 					success : function(data) {
 						var tagViewObject = new CNPORTFOLIO.TagView({
 							template : data
@@ -38,10 +38,10 @@ CNPORTFOLIO.mainRouter = Backbone.Router.extend({
 	},
 
 	loadThumbs : function(id, showAll) {
-		require(["assets/modules/thumbs/models/ThumbModel.js"], function() {
-			require(["assets/modules/thumbs/views/ThumbView.js"], function() {
+		require(["assets/modules_portfolio/thumbs/models/ThumbModel.js"], function() {
+			require(["assets/modules_portfolio/thumbs/views/ThumbView.js"], function() {
 				$.ajax({
-					url : "assets/modules/thumbs/templates/ThumbTemplate.html",
+					url : "assets/modules_portfolio/thumbs/templates/ThumbTemplate.html",
 					success : function(data) {
 						var thumbViewObject = new CNPORTFOLIO.ThumbView({
 							template : data,

@@ -10,10 +10,12 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 
 	initiateDisplayThumb : function(event) {
 		event.preventDefault();
-		var divToOpen = $(event.currentTarget).attr('href');
-		$.fancybox({
-	        "href": divToOpen, 
-	    });
+		if(!$(event.currentTarget).hasClass('noData')) {
+			var divToOpen = $(event.currentTarget).attr('href');
+			$.fancybox({
+		        "href": divToOpen, 
+		    });	
+		}
 	},
 
 	bindEvents : function() {
@@ -35,6 +37,7 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		var rendarableData = this.prepareData(data);
 		var html = Mustache.render(this.template, rendarableData);
 		this.$el.append(html);
+		$(window).trigger('resize');
 		var self = this;
 		$(".thumbList li a").unbind('click');
 		$(".thumbList li a").click(function(event){self.initiateDisplayThumb(event)});
@@ -62,7 +65,6 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 	prepareData : function(data) {
 		var returnData = {};
 		returnData.thumbs = ((data)?data.Message:null);
-
 		return returnData;
 	}
 });
