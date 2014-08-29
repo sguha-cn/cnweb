@@ -22,7 +22,7 @@
             {{/project_name}}
             {{#project_url}}    
                 <p>Url
-                    <span><a href="#">{{project_url}}</a></span>
+                    <span><a href="{{project_url}}" target="_blank">{{project_url}}</a></span>
                 </p>
             {{/project_url}}    
             {{#project_brief_desc}}
@@ -43,7 +43,7 @@
 {{/thumbs}}
 {{^thumbs}}
 <li>
-    <a href="#inline1" target="_blank" class="fancybox-effects-a">
+    <a href="#inline1" target="_blank" class="fancybox-effects-a noData">
 
         <img src="" alt="" />
         <h2>No more project availeble for the tag </h2>

@@ -10,10 +10,12 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 
 	initiateDisplayThumb : function(event) {
 		event.preventDefault();
-		var divToOpen = $(event.currentTarget).attr('href');
-		$.fancybox({
-	        "href": divToOpen, 
-	    });
+		if(!$(event.currentTarget).hasClass('noData')) {
+			var divToOpen = $(event.currentTarget).attr('href');
+			$.fancybox({
+		        "href": divToOpen, 
+		    });	
+		}
 	},
 
 	bindEvents : function() {
@@ -35,11 +37,12 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		var rendarableData = this.prepareData(data);
 		var html = Mustache.render(this.template, rendarableData);
 		this.$el.append(html);
+		$(window).trigger('resize');
 		var self = this;
 		$(".thumbList li a").unbind('click');
 		$(".thumbList li a").click(function(event){self.initiateDisplayThumb(event)});
 		$(".portfolioDetailsBlk2 .loadmore").unbind('click');
-		$(".portfolioDetailsBlk2 .loadmore").click(function(event){event.preventDefault();$(event.currentTarget).hide();self.loadThumbs(parseInt($(".portfolioDetailsBlk2 .loadmore").attr('data-last-val')))});
+		$(".portfolioDetailsBlk2 .loadmore").click(function(event){event.preventDefault();$(event.currentTarget).hide();self.loadThumbs(parseInt($(".portfolioDetailsBlk2 .loadmore").attr('data-last-val'))+1)});
 		if(rendarableData && typeof rendarableData.thumbs != "undefined" && rendarableData.thumbs && rendarableData.thumbs.length<9) {
 			$(".portfolioDetailsBlk2 .loadmore").css({
 				"display" : "none"
@@ -62,7 +65,6 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 	prepareData : function(data) {
 		var returnData = {};
 		returnData.thumbs = ((data)?data.Message:null);
-
 		return returnData;
 	}
 });
