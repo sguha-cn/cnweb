@@ -1,0 +1,61 @@
+{{#thumbs}}
+<li>
+    <a href="#{{id}}" target="_blank" class="fancybox-effects-a">
+
+        <img style="width:240px;height:191px" src="{{#image_small}}{{image_small}}{{/image_small}}{{^image_small}}http://www.electrolabindia.com/Images/nodata.jpg{{/image_small}}" alt="" />
+        <h2>{{about_name}} </h2>
+        <p>{{about_brief_desc}}</p>
+    </a>
+    <div id="{{id}}" style="width:100%;display: none;">
+        <div class="lightboxpanel">
+            <img src="{{#image_large}}{{image_large}}{{/image_large}}{{^image_large}}http://www.electrolabindia.com/Images/nodata.jpg{{/image_large}}" alt="" />
+            <div class="webdet">
+            {{#about_subtitle_1}}    
+                <p>Subtitle1
+                    <span>{{about_subtitle_1}}</span>
+                </p>
+            {{/about_subtitle_1}}
+            {{#about_subtitle_2}}    
+                <p>Subtitle2
+                    <span>{{about_subtitle_2}}</span>
+                </p>
+            {{/about_subtitle_2}}    
+            {{#about_brief_desc}}
+                <p>The Brief
+                    <span>{{about_brief_desc}}</span>
+                </p>
+            {{/about_brief_desc}}
+            {{#about_full_desc}}
+                <p>Full Description
+                    <span>{{about_full_desc}}</span>
+                </p>
+            {{/about_full_desc}}    
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</li>
+{{/thumbs}}
+{{^thumbs}}
+<li>
+    <a href="#inline1" target="_blank" class="fancybox-effects-a noData">
+
+        <img src="" alt="" />
+        <h2>No more project availeble for the tag </h2>
+        <p></p>
+    </a>
+    <div id="inline1" style="width:100%;display: none;">
+        <div class="lightboxpanel">
+            <img src="" alt="" />
+            <div class="webdet">
+                <p>
+                    <span>No Project availeble</span>
+                </p>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</li>
+
+{{/thumbs}}

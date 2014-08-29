@@ -42,7 +42,7 @@ CNPORTFOLIO.ThumbView = Backbone.View.extend({
 		$(".thumbList li a").unbind('click');
 		$(".thumbList li a").click(function(event){self.initiateDisplayThumb(event)});
 		$(".portfolioDetailsBlk2 .loadmore").unbind('click');
-		$(".portfolioDetailsBlk2 .loadmore").click(function(event){event.preventDefault();$(event.currentTarget).hide();self.loadThumbs(parseInt($(".portfolioDetailsBlk2 .loadmore").attr('data-last-val'))+1)});
+		$(".portfolioDetailsBlk2 .loadmore").click(function(event){event.preventDefault();$(event.currentTarget).hide();self.loadThumbs(parseInt($(".portfolioDetailsBlk2 .loadmore").attr('data-last-val')))});
 		if(rendarableData && typeof rendarableData.thumbs != "undefined" && rendarableData.thumbs && rendarableData.thumbs.length<9) {
 			$(".portfolioDetailsBlk2 .loadmore").css({
 				"display" : "none"
